@@ -33,9 +33,9 @@ export default function Header() {
           <Button color="inherit" onClick={() => router.push("/")}>
             Home
           </Button>
-          {/* <Button color="inherit" onClick={() => router.push("/shop")}>
+          <Button color="inherit" onClick={() => router.push("/shop")}>
             Shop
-          </Button> */}
+          </Button>
           <Button color="inherit" onClick={() => router.push("/about")}>
             About
           </Button>

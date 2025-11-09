@@ -108,7 +108,7 @@ export default function UpdateModuleModal({ open, handleClose, refetch, module }
         },
         {
           onSuccess: () => {},
-          onError: (error) => {
+          onError: () => {
             return;
           },
         }

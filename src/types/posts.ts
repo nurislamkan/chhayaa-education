@@ -23,7 +23,7 @@ export type PagesType = {
   status: number;
 };
 
-export type CoursesType = {
+export type productsType = {
   id: number;
   title: string;
   imageUrl: string;
@@ -40,7 +40,7 @@ export type StudentType = {
   identifier: string;
   content: string;
   imageUrl: string;
-  totalCourse: number;
+  totalproduct: number;
   createdBy: string;
   updatedAt: Date;
   createdAt: Date;
@@ -66,7 +66,7 @@ export type InstructorType = {
   title?: string;
   content?: string;
   rating?: number;
-  totalCourse?: number;
+  totalproduct?: number;
   featured?: boolean;
   imageUrl?: string;
   status?: string;

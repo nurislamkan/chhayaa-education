@@ -4,7 +4,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 
 // Material UI components for building UI elements
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import {
   Button,
   Container,

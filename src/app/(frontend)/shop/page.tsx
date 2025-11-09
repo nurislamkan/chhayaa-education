@@ -83,11 +83,11 @@ export default function ProductPage() {
       )}
       {!isLoading && (
         <Grid container spacing={3}>
-          <Grid item xs={12} md={2}>
+          <Grid size={{ xs: 12, md: 2 }}>
             <ProductFilters />
           </Grid>
 
-          <Grid item xs={12} md={10}>
+          <Grid size={{ xs: 12, md: 10 }}>
             <Box
               display="flex"
               justifyContent="space-between"
@@ -127,10 +127,11 @@ export default function ProductPage() {
                 {products.map((product: any) => (
                   <Grid
                     key={product.id}
-                    item
-                    xs={12}
-                    sm={viewMode === "grid" ? 6 : 12}
-                    md={viewMode === "grid" ? 3 : 12}
+                    size={{
+    xs: 12,
+    sm: viewMode === "grid" ? 6 : 12,
+    md: viewMode === "grid" ? 3 : 12,
+  }}
                   >
                     <Card
                       sx={{

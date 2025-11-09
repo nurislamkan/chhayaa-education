@@ -2,8 +2,7 @@
 
 import { useModulesQuery } from "@data/module/use-module.query";
 import { useAllModulePermissions } from "@/data/permissions/use-permissions.query";
-import { getAuthCredentials } from "@/utils/auth-utils";
-import DynamicIcon from "@components/ui/dynamic-icon";
+import { getAuthCredentials } from "@/utils/auth-utils"; 
 import { type Navigation } from "@toolpad/core/AppProvider";
 
 export default function useNavigationItems(): Navigation {
@@ -17,23 +16,22 @@ export default function useNavigationItems(): Navigation {
   const allModuleIds = modules?.map((item: any) => item.id) ?? [];
  
 
-  const permissionsResult = useAllModulePermissions(allModuleIds, groupId);
-  const modulePermissions = permissionsResult?.data ?? [];
+  const permissionsResult = useAllModulePermissions(allModuleIds, groupId); 
 
   if (!modules || !permissionsResult?.data) return [];
  
 
-  const navigationItems: Navigation = modules
-    .filter((module: any) => {
-      return modulePermissions.some(
-        (perm: any) => perm.moduleId === module.id && perm.actions?.length > 0
-      );
-    })
-    .map((module: any) => ({
-      title: module.name,
-      page: { kind: "page", name: module.slug },
-      icon: <DynamicIcon iconName={module.icon} />,
-    }));
+  // const navigationItems: Navigation = modules
+  //   .filter((module: any) => {
+  //     return modulePermissions.some(
+  //       (perm: any) => perm.moduleId === module.id && perm.actions?.length > 0
+  //     );
+  //   })
+  //   .map((module: any) => ({
+  //     title: module.name,
+  //     page: { kind: "page", name: module.slug },
+  //     icon: <DynamicIcon iconName={module.icon} />,
+  //   }));
 
   return allModuleIds;
 }

@@ -3,7 +3,7 @@ import {
   Button, 
   CardMedia,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2"; 
+import Grid from "@mui/material/Grid"; 
 import ProductInfo from "../productInfo"; 
 import RelatedProducts from "../relatedProducts";
 import { fetchProductDetails } from "@data/products/use-product.query";

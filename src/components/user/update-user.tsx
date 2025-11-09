@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import DialogContent from "@mui/material/DialogContent";
 import { FaCheckCircle } from "react-icons/fa";
 import BootstrapDialog, { BootstrapDialogTitle } from "@components/ui/bootstrap-dialog";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { Box, Button } from "@mui/material"; 
 import { UpdateUserListInfo } from "@data/user/use-user-list.query";
 import { toast } from "react-toastify"; 

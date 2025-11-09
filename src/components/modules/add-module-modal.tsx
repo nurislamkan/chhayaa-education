@@ -100,8 +100,7 @@ export default function AddModuleModal({ open, handleClose, refetch }: ModuleMod
     if (!validate()) {
       toast.error("Please fix the errors before submitting.");
       return;
-    }
-    console.log("parentId", parentId);
+    } 
     // If a parent module is selected, update that parent module's slug to null
     if (parentId !== 0) {
       updateModule(
@@ -110,10 +109,10 @@ export default function AddModuleModal({ open, handleClose, refetch }: ModuleMod
           slug: "",
         },
         {
-          onSuccess: (data) => {
+          onSuccess: (data:any) => {
             console.log("data", data);
           },
-          onError: (error) => {
+          onError: () => {
             return;
           },
         }

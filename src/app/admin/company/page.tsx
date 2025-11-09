@@ -1,7 +1,7 @@
 import React from "react";
 import { getserverAuth } from "@/utils/api/actions";
 import { Divider, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { fetchCompanyData } from "@/data/products/use-company.query";
 import CreateCompany from "@/components/products/company/create-company";
 import CompanyTable from "@/components/products/company/company-table";

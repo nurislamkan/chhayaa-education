@@ -6,7 +6,7 @@ import {
   Button,
   Breadcrumbs,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import PostSidebar from "../blog/sidebar";
 import { getserverAuth } from "@/utils/api/actions";
 import ViewModeButton from "../blog/viewModeButton"; // Import the new button component

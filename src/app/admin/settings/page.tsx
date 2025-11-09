@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Box, Button, TextField, Typography, Paper } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import Image from "next/image";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

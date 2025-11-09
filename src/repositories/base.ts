@@ -1,8 +1,7 @@
 import http from "@utils/api/http";
 import { getAuthCredentials } from "@utils/auth-utils";
 import { ROUTES } from "@utils/routes";
-import axios from "axios";
-import { log } from "console";
+import axios from "axios"; 
 import Cookies from "js-cookie";
 import { redirect } from "next/navigation";
 

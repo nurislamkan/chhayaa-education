@@ -1,7 +1,7 @@
 import ProductTable from "@components/products/product/product-table";
 import { fetchProductData } from "@data/products/use-product.query";
 import { getserverAuth } from "@utils/api/actions";
-import { Button,  Grid2, Typography } from "@mui/material";
+import { Button,  Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { BiPlusMedical } from "react-icons/bi";
@@ -44,11 +44,11 @@ const ProductsPage: React.FC = async () => {
       {Array.isArray(data) && data.length > 0 ? (
         <ProductTable data={data} />
       ) : (
-        <Grid2 size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <Typography variant="h6" align="center" color="textSecondary">
             No product available
           </Typography>
-        </Grid2>
+        </Grid>
       )}
     </Box>
   );

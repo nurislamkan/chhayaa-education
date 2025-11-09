@@ -7,7 +7,7 @@
   TextField,
   Typography,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { Facebook, Twitter, Instagram, Send } from "@mui/icons-material";
 import Link from "next/link"; 
 

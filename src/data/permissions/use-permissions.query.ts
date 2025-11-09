@@ -73,14 +73,16 @@ const getModuleByIds = async (
   return result;
 };
 
-const useAllModulePermissions = (moduleIds: any[], groupId: number) => {
-  const { data } = useQuery({
+const useAllModulePermissions = (moduleIds: number[], groupId: number) => {
+  return useQuery({
     queryKey: ["module_permissions", moduleIds, groupId],
     queryFn: () => getModuleByIds(moduleIds, groupId),
-    enabled: !!moduleIds.length && !!groupId,
+    enabled: moduleIds.length > 0 && groupId > 0,
+    select: data => data?.data ?? [],
   });
-  return data ? data.data : null;
 };
+
+ 
 
 const fetchModuleGroup = async (
   moduleId: number,

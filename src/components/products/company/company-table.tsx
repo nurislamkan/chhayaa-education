@@ -23,7 +23,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import BootstrapDialog, { BootstrapDialogTitle } from "@/components/ui/bootstrap-dialog";
 import OutlinedInputField from "@/components/ui/out-lined-input-field";
 import { FaCheckCircle } from "react-icons/fa";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import SaveButton from "@/components/ui/save-button";
 import { useRouter } from "next/navigation";
 import { useDeleteCompany, useUpdateCompanyInfo } from "@/data/products/use-company.query";

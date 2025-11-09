@@ -74,4 +74,5 @@ export {
   useModulesQuery,
   useDeleteModulesMutation,
   useCreateModulesMutation,
+  deleteModulesById,
 };

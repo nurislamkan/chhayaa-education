@@ -2,6 +2,8 @@ import Options from "@repositories/options";
 import { API_ENDPOINTS, LOCAL_ENDPOINTS } from "@utils/api/endpoints";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import User from "@repositories/user";
+import Product from "@repositories/product";
+import Category from "@repositories/category";
 import { ROLES } from "@/utils/constants";
 import Groups from "@repositories/groups";
 
@@ -56,7 +58,8 @@ export const useSaveOptionsMutation = () => {
       Object.entries(formData).forEach(([key, value]) => {
         const variables = {
           option_name: key,
-          option_value: value instanceof File ? value.name : value ?? undefined,
+          option_value:
+            value instanceof File ? value.name : (value ?? undefined),
         };
         Options.create(API_ENDPOINTS.OPTIONS, variables);
         //variables.append(key, value ?? "");
@@ -68,9 +71,7 @@ export const useSaveOptionsMutation = () => {
 };
 
 const deleteExpenseById = async (id: number) => {
-  const updateDelete = {
-    deleted: true,
-  };
+  const updateDelete = { deleted: true };
   const { data } = await Options.patchUpdate(
     `${API_ENDPOINTS.OPTIONS}/${id}`,
     updateDelete
@@ -100,6 +101,68 @@ const userWithCount = async (options: any, localContext?: any) => {
   );
   return data;
 };
+
+export const productWithCount = async (
+  options: Record<string, any>,
+  localContext = false
+): Promise<number> => {
+  try {
+    const endpoint = localContext
+      ? LOCAL_ENDPOINTS.PRODUCTS
+      : API_ENDPOINTS.PRODUCTS; 
+    const response = await Product.find(
+      `${endpoint}?where=${encodeURIComponent(JSON.stringify(options))}`,
+      localContext
+    );
+
+    // ✅ Count products from the response
+    if (Array.isArray(response?.data)) {
+      return response.data.length;
+    }
+
+    // Optional fallback in case of unexpected shape
+    if (Array.isArray(response)) {
+      return response.length;
+    }
+
+    return 0;
+  } catch (error) {
+    console.error("Error fetching product count:", error);
+    return 0;
+  }
+};
+
+export const categoryWithCount = async (
+  options: Record<string, any>,
+  localContext = false
+): Promise<number> => {
+  try {
+    const endpoint = localContext
+      ? LOCAL_ENDPOINTS.PRODUCTS
+      : API_ENDPOINTS.PRODUCTS;
+
+    const response = await Category.find(
+      `${endpoint}?where=${encodeURIComponent(JSON.stringify(options))}`,
+      localContext
+    );
+
+    // ✅ Count products from the response
+    if (Array.isArray(response?.data)) {
+      return response.data.length;
+    }
+
+    // Optional fallback in case of unexpected shape
+    if (Array.isArray(response)) {
+      return response.length;
+    }
+
+    return 0;
+  } catch (error) {
+    console.error("Error fetching product count:", error);
+    return 0;
+  }
+};
+
 const useDashboardStats = (localContext?: any) => {
   const fetchData = async () => {
     return {
@@ -119,6 +182,15 @@ const useDashboardStats = (localContext?: any) => {
         { status: "active", role: ROLES.ADMIN, deleted: 0 },
         localContext
       ),
+      totalProduct: await productWithCount(
+        { status: "active", role: ROLES.ADMIN, deleted: 0 },
+        localContext
+      ),
+      totalCategory: await productWithCount(
+        { status: "active", role: ROLES.ADMIN, deleted: 0 },
+        localContext
+      ),
+      userRole: ROLES.ADMIN,
       groupTotal: await groupWithCount({ status: 1, deleted: 0 }, localContext),
     };
   };

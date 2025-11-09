@@ -95,7 +95,7 @@ export default function AddToCartPage() {
                     <TableCell>
                       <Grid container spacing={2} alignItems="center" position="relative">
                         {/* Product Image (Reduced Size) */}
-                        <Grid item>
+                        <Grid >
                           <Image
                             src={item.imageUrl || "/default-image.jpg"}
                             alt={item.name}
@@ -109,7 +109,7 @@ export default function AddToCartPage() {
                         </Grid>
 
                         {/* Product Name with Delete Icon */}
-                        <Grid item position="relative">
+                        <Grid position="relative">
                           <Typography variant="body1">{item.name}</Typography>
                           <IconButton
                             onClick={() => handleRemoveItem(index)}

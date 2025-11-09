@@ -1,34 +1,32 @@
 "use client";
 import { Box, Card, CardContent, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import PeopleIcon from "@mui/icons-material/People";
 import GroupIcon from "@mui/icons-material/Group";
 import StoreIcon from "@mui/icons-material/Store";
 import CategoryIcon from "@mui/icons-material/Category";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ReviewsIcon from "@mui/icons-material/RateReview";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import ReviewsIcon from "@mui/icons-material/RateReview"; 
 import DescriptionIcon from "@mui/icons-material/Description";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import LabelIcon from "@mui/icons-material/Label"; 
-import { useDashboardStats } from "@data/options/use-options.query";
-//import {  useDemoRouter } from '@toolpad/core/internal';
+import { useDashboardStats } from "@data/options/use-options.query"; 
 
-function BedCamePageContent({ pathname }: { pathname: string }) {
-  return (
-    <Box
-      sx={{
-        py: 4,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-      }}
-    >
-      <Typography>Dashboard content for {pathname}</Typography>
-    </Box>
-  );
-}
+// function BedCamePageContent({ pathname }: { pathname: string }) {
+//   return (
+//     <Box
+//       sx={{
+//         py: 4,
+//         display: 'flex',
+//         flexDirection: 'column',
+//         alignItems: 'center',
+//         textAlign: 'center',
+//       }}
+//     >
+//       <Typography>Dashboard content for {pathname}</Typography>
+//     </Box>
+//   );
+// }
 
 export default function Dashboard() {
   const { data, isLoading, error } = useDashboardStats();
@@ -37,6 +35,7 @@ export default function Dashboard() {
 
   if (isLoading) return <Typography>Loading...</Typography>;
   if (error) return <Typography>Error fetching data</Typography>; 
+console.log('data',data);
 
   return (
     <Box p={3}>
@@ -94,22 +93,22 @@ export default function Dashboard() {
         </Grid>
       </Box>
 
-      {/* Course Group */}
+      {/* product Group */}
       <Box mb={3}>
         <Typography variant="h5" sx={{ mb: 2, mt: 8, fontWeight: "bold" }}>
-          🛍️ Courses details
+          🛍️ Products details
         </Typography>
         <Grid container spacing={2}>
           {[
             {
-              label: "Total Course",
-              value: data?.products,
+              label: "Total product",
+              value: data?.totalProduct,
               icon: <ShoppingCartIcon />,
               bgColor: "#FF9800",
             },
             {
               label: "Total Categories",
-              value: data?.categories,
+              value: data?.totalCategory,
               icon: <CategoryIcon />,
               bgColor: "#4CAF50",
             },

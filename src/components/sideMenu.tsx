@@ -78,6 +78,7 @@ export default function SideMenu({ bgColor }: { bgColor: string }) {
   const allModulIds = modules && modules.map((item: any) => item.id);
 
   const ModulePermissions = useAllModulePermissions(allModulIds || [], groupId);
+  const { data: modulePermissions = [] } = useAllModulePermissions(allModulIds || [], groupId);
 
   return (
     <Drawer
@@ -97,31 +98,26 @@ export default function SideMenu({ bgColor }: { bgColor: string }) {
     >
       <Box sx={{ overflow: "auto", padding: "20px 0px 0px" }}>
         <List>
-          {modules &&
-            modules.map((item: any) => {
-              const isAccessible =
-                ModulePermissions &&
-                ModulePermissions.some(
-                  (permission: any) => permission.moduleId === item.id && permission.actions.length > 0
-                );
+    {modules &&
+      modules.map((item: any) => {
+        const isAccessible = modulePermissions.some(
+          (permission: any) => permission.moduleId === item.id && permission.actions.length > 0
+        );
 
-              // Only render the item if it is accessible
-              if (!isAccessible) return null;
-              {
-                return (
-                  <ListItemCustom key={item.id}>
-                    <Link className={getActiveClass(item.slug)} href={item.slug}>
-                      <ListItemIcon sx={{ minWidth: "35px" }}>
-                        <DynamicIcon iconName={item.icon} />
-                      </ListItemIcon>
-                      <ListItemText primary={item.name} />
-                      {isAccessible}
-                    </Link>
-                  </ListItemCustom>
-                );
-              }
-            })}
-        </List>
+        if (!isAccessible) return null;
+
+        return (
+          <ListItemCustom key={item.id}>
+            <Link className={getActiveClass(item.slug)} href={item.slug}>
+              <ListItemIcon sx={{ minWidth: "35px" }}>
+                <DynamicIcon iconName={item.icon} />
+              </ListItemIcon>
+              <ListItemText primary={item.name} />
+            </Link>
+          </ListItemCustom>
+        );
+      })}
+  </List>
       </Box>
     </Drawer>
   );

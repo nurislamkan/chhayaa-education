@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode, useEffect, Suspense } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
 import { ROUTES } from "@utils/routes";
@@ -8,33 +8,24 @@ import { createTheme } from "@mui/material/styles";
 import { AppProvider, type Session, type Router as ToolpadRouter } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { DemoProvider } from "@toolpad/core/internal";        
+import { useModulesQuery } from "@/data/module/use-module.query";   
 import { transformNavigation } from "@/utils/transformNavigation";
-import { useModulesQuery } from "@/data/module/use-module.query";  
 
 interface DashboardLayoutProps {
   children: ReactNode;
 }
 
 const adminTheme = createTheme({
-  cssVariables: {
-    colorSchemeSelector: "data-toolpad-color-scheme",
-  },
+  cssVariables: { colorSchemeSelector: "data-toolpad-color-scheme" },
   colorSchemes: { light: true, dark: true },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 600,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
+  breakpoints: { values: { xs: 0, sm: 600, md: 600, lg: 1200, xl: 1536 } },
 });
 
-export default function DashboardOnlyLayout({ children }: DashboardLayoutProps) {
+function DashboardOnlyLayoutInner({ children }: DashboardLayoutProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   const authCredentials = getAuthCredentials();
 
   useEffect(() => {
@@ -47,15 +38,13 @@ export default function DashboardOnlyLayout({ children }: DashboardLayoutProps) 
     where: { parentId: 0 },
     order: ["ordering ASC"],
     include: [
-      {
-        relation: "children",
-        scope: {
-          order: ["ordering ASC"],
-        },
-      },
+      { relation: "children", scope: { order: ["ordering ASC"] } },
     ],
   });
-  const navigation = transformNavigation(modules || []);
+ 
+  console.log('modules ',modules );
+  //const navigation = transformNavigation(modules || []);
+  //console.log('navigation ',navigation );
 
   const toolpadRouter: ToolpadRouter = {
     pathname: pathname || "",
@@ -65,16 +54,25 @@ export default function DashboardOnlyLayout({ children }: DashboardLayoutProps) 
 
   const adminWindow = typeof window !== "undefined" ? window : undefined;
 
-  const [session, setSession] = React.useState<Session | null>({
-    user: {
-      name: authCredentials?.firstName,
-      email: authCredentials?.email,
-      image: "/icon.png",
-    },
-  });
+ const [session, setSession] = React.useState<Session | null>(null);
 
-  const authentication = React.useMemo(() => {
-    return {
+useEffect(() => {
+  const auth = getAuthCredentials();
+  if (!isAuthenticated(auth)) {
+    router.replace(ROUTES.LOGIN);
+  } else {
+    setSession({
+      user: {
+        name: auth?.firstName,
+        email: auth?.email,
+        image: "/icon.png",
+      },
+    });
+  }
+}, [router]);
+
+  const authentication = React.useMemo(
+    () => ({
       signIn: () => {
         setSession({
           user: {
@@ -84,16 +82,15 @@ export default function DashboardOnlyLayout({ children }: DashboardLayoutProps) 
           },
         });
       },
-      signOut: () => {
-        router.replace(ROUTES.LOGOUT);
-      },
-    };
-  }, []);
+      signOut: () => router.replace(ROUTES.LOGOUT),
+    }),
+    [router, authCredentials]
+  );
 
   return (
     <DemoProvider window={adminWindow}>
       <AppProvider
-        navigation={navigation}
+      //navigation={navigation}
         branding={{
           logo: <img src="/logo-new.png" alt="Custom CMS Logo" />,
           title: "",
@@ -105,11 +102,17 @@ export default function DashboardOnlyLayout({ children }: DashboardLayoutProps) 
         theme={adminTheme}
         window={adminWindow}
       >
-        <DashboardLayout>
-          {/* <AdminBreadcrumbs /> */}
-          {children}
-        </DashboardLayout>
+        <DashboardLayout>{children}</DashboardLayout>
       </AppProvider>
     </DemoProvider>
+  );
+}
+
+// ✅ Wrap with Suspense
+export default function DashboardOnlyLayout({ children }: DashboardLayoutProps) {
+  return (
+    <Suspense fallback={<div>Loading dashboard...</div>}>
+      <DashboardOnlyLayoutInner>{children}</DashboardOnlyLayoutInner>
+    </Suspense>
   );
 }

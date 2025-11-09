@@ -14,12 +14,12 @@ export default function SlickSlider() {
     {
       name: "Jane Smith",
       review: "A great experience using this platform.",
-      image: "/users/jane.jpg",
+      image: "/users/john.jpg",
     },
     {
       name: "Mike Johnson",
       review: "Highly recommend it to everyone!",
-      image: "/users/mike.jpg",
+      image: "/users/john.jpg",
     },
   ];
 

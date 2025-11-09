@@ -1,5 +1,5 @@
+// @components/ui/dynamic-icon.tsx
 import { ComponentType, SVGProps } from "react";
-
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import * as BsIcons from "react-icons/bs";
@@ -75,20 +75,34 @@ interface IconProps extends SVGProps<SVGSVGElement> {
 type IconComponent = ComponentType<IconProps>;
 
 interface DynamicIconProps {
+  /** Name of the icon exactly as it appears in react-icons (e.g. "MdDashboard") */
   iconName: string;
+  /** Optional fallback icon name if `iconName` is not found */
+  fallback?: string;
   size?: number | string;
   color?: string;
   className?: string;
 }
 
-const DynamicIcon: React.FC<DynamicIconProps> = ({ iconName, size, color, className }) => {
-  const IconComponent = iconSets[iconName as keyof typeof iconSets] as IconComponent | undefined;
+const DynamicIcon: React.FC<DynamicIconProps> = ({
+  iconName,
+  fallback = "MdHelpOutline", // a safe default that always exists
+  size,
+  color,
+  className,
+}) => {
+  // Primary lookup
+  let Icon = iconSets[iconName as keyof typeof iconSets] as IconComponent | undefined;
 
-  if (!IconComponent) {
-    return null;
+  // Fallback lookup (only if primary failed)
+  if (!Icon && fallback) {
+    Icon = iconSets[fallback as keyof typeof iconSets] as IconComponent | undefined;
   }
 
-  return <IconComponent size={size} color={color} className={className} />;
+  // If still nothing, render nothing (or you could return a placeholder SVG)
+  if (!Icon) return null;
+
+  return <Icon size={size} color={color} className={className} />;
 };
 
 export default DynamicIcon;

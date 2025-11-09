@@ -7,7 +7,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import BootstrapDialog, {
   BootstrapDialogTitle,
 } from "@components/ui/bootstrap-dialog";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { Box, Button } from "@mui/material";
 import { useRegistrationMutation } from "@data/user/use-registration.mutation";
 import { toast } from "react-toastify";

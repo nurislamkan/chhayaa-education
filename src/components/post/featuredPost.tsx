@@ -1,7 +1,7 @@
 import { fetchPostsData } from "@/data/posts/use-posts.query";
 import { getserverAuth } from "@utils/api/actions";
 import { Box, Card, CardContent, Typography } from "@mui/material"; 
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import Image from "next/image";
 import { MdCategory } from "react-icons/md";
 import Link from "next/link";

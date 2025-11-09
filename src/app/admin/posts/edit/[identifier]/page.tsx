@@ -102,7 +102,7 @@ export default function EditPostForm() {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} md={9}>
+        <Grid size={{ xs: 12, md: 9 }}>
           <TextField
             fullWidth
             label="Title"
@@ -134,7 +134,7 @@ export default function EditPostForm() {
           </Box>
         </Grid>
 
-        <Grid item xs={12} md={3}>
+        <Grid size={{ xs: 12, md: 3 }}>
           <FormControl fullWidth sx={{ mb: 2 }}>
             <InputLabel>Category</InputLabel>
             <Select

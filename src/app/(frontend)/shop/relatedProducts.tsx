@@ -6,7 +6,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { fetchProductData } from "@data/products/use-product.query";
 import { getserverAuth } from "@/utils/api/actions";
 import Link from "next/link";

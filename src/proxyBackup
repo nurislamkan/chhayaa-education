@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(req: NextRequest) {
+export function proxyBackup(req: NextRequest) {
   // Assuming JWT or session token
   const authCred = req.cookies.get("AUTH_CRED");
   const token = authCred ? JSON.parse(authCred.value).token : null;

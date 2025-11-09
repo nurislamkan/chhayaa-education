@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useCategoryQuery } from "@data/category/use-category.query";
 import { Typography } from "@mui/material";
 import CategoryTable from "@components/category/category-table";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import CreateCategory from "@components/category/create-category"; 
 
 export default function CategoryPage() {

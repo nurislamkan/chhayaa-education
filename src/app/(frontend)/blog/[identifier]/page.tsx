@@ -6,7 +6,7 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import PostSidebar from "../sidebar";
 import Link from "next/link";
 import { FaRegCalendarDays } from "react-icons/fa6";
@@ -20,7 +20,7 @@ import {
 import Image from "next/image";
 import { MdCategory, MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import React from "react";
-import LinkButton from "@components/ui/link-button"; 
+import LinkButton from "@components/ui/link-button";
 
 interface Post {
   id: string; // Added the missing 'id' property
@@ -76,6 +76,7 @@ export default async function BlogPostPage({
     ); // Or display an error message
   }
 
+  const { tags } = post;
   return (
     <Box p={3}>
       <Grid container spacing={3}>
@@ -182,12 +183,12 @@ export default async function BlogPostPage({
               sx={{ marginBottom: 2 }}
             >
               <IoIosPricetags /> &nbsp;
-              {post.tags &&
-                post.tags.length > 0 &&
-                post.tags.map((tag, index) => (
+              {tags &&
+                tags.length > 0 &&
+                tags.map((tag, index) => (
                   <React.Fragment key={tag.id}>
                     <Link href={`/tag/${tag.identifier}`}>{tag.name}</Link>
-                    {index < (post.tags?.length ?? 0) - 1 && ", "}
+                    {index < tags.length - 1 && ", "}
                   </React.Fragment>
                 ))}
             </Typography>

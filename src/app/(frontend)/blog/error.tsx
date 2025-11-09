@@ -5,21 +5,20 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 export default function Error({
-  error,
-  reset,
+  error, 
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
+    // eslint-disable-next-line no-console
+    console.error(error); // or send to a logging service instead
   }, [error]);
 
   return (
     <Container
       maxWidth="lg"
-      style={{ textAlign: "center", marginTop: "5%", marginBottom: "100px" }}
+      sx={{ textAlign: "center", mt: "5%", mb: "100px" }}
     >
       <Box>
         <Typography variant="h4" color="error" gutterBottom>
@@ -32,6 +31,7 @@ export default function Error({
         <Typography variant="body1" color="textSecondary" paragraph>
           Please try again later. If the issue persists, contact support.
         </Typography>
+
         <Link href="/blog" passHref style={{ marginTop: "20px" }}>
           Go Back to Blog
         </Link>

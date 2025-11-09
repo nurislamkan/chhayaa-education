@@ -1,5 +1,5 @@
 import { Box, Typography, Container, Paper } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import FeaturePost from "@components/post/featuredPost";
 import SlickSlider from "@/components/slickSlider";
 
